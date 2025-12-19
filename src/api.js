@@ -33,6 +33,17 @@ export const api = {
     }));
   },
 
+  addResource: async (newResource) => {
+    const record = await pb.collection('resources').create(newResource);
+    return {
+      id: record.id,
+      name: record.name,
+      quantity: record.quantity,
+      unit: record.unit,
+      type: record.type
+    };
+  },
+
   // [UPDATE] Aggiorna una risorsa specifica
   updateResource: async (id, newQuantity) => {
     const record = await pb.collection('resources').update(id, {

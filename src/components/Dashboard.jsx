@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStore } from '../store';
 import ResourceCard from './ResourceCard';
+import AddForm from './AddForm';
 
 const Dashboard = () => {
     // SELEZIONE DELLO STATO (State Selection)
@@ -15,15 +16,18 @@ const Dashboard = () => {
     if (error) return <div style={{ color: 'red' }}>Errore: {error}</div>;
 
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-            {resources.map((res) => (
-                <ResourceCard
-                    key={res.id}
-                    resource={res}
-                    onUpdate={(delta) => updateResource(res.id, delta)}
-                />
-            ))}
-        </div>
+        <>
+            <AddForm />
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                {resources.map((res) => (
+                    <ResourceCard
+                        key={res.id}
+                        resource={res}
+                        onUpdate={(delta) => updateResource(res.id, delta)}
+                    />
+                ))}
+            </div>
+        </>
     );
 };
 

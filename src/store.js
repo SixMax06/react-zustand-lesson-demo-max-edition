@@ -26,6 +26,16 @@ export const useStore = create((set, get) => ({
         }
     },
 
+    addResource: async (newResource) => {
+        set({ isLoading: true, error: null });
+        try {
+            const addedResource = await api.addResource(newResource);
+            set({ resources: [...get().resources, addedResource], isLoading: false });
+        } catch (err) {
+            set({ error: err.message, isLoading: false });
+        }
+    },
+
     // 2. Aggiornamento Risorsa (Optimistic Update)
     updateResource: async (id, delta) => {
         // 1. Salva lo stato precedente (per eventuale rollback)
